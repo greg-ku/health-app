@@ -6,3 +6,4 @@ export interface IFitnessData {
   createdAt?: Date
 }
 
+export type PeriodTypes = '7days' | '30days' | 'aSeason' | 'aYear' | 'all'

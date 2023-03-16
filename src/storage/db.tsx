@@ -21,7 +21,7 @@ const getDB = (): Promise<IDBDatabase> => {
   })
 }
 
-export const readFromDb = async (objectStoreName: string, key: string): Promise<any> => {
+export const readDbByKey = async (objectStoreName: string, key: string): Promise<any> => {
   const db = await getDB()
   const transaction = db.transaction([objectStoreName])
   const objectStore = transaction.objectStore(objectStoreName)
@@ -31,6 +31,39 @@ export const readFromDb = async (objectStoreName: string, key: string): Promise<
     request.onsuccess = (e) => {
       // console.log('read success', e.target.result)
       resolve(e.target.result || null)
+    }
+  })
+}
+
+interface IKeyRange {
+  start: string | number | null
+  due: string | number | null
+}
+
+export const readDbByKeyRange = async (objectStoreName: string, range: IKeyRange): Promise<any> => {
+  const db = await getDB()
+  const transaction = db.transaction([objectStoreName])
+  const objectStore = transaction.objectStore(objectStoreName)
+  const results = []
+  return new Promise((resolve, reject) => {
+    let keyRange
+    if (range.start !== null && range.due !== null) {
+      keyRange = IDBKeyRange.bound(range.start, range.due)
+    } else if (range.due !== null) {
+      keyRange = IDBDatabase.upperBound(range.due)
+    } else if (range.start !== null) {
+      keyRange = IDBDatabase.lowerBound(range.start)
+    } else {
+      reject('key range error')
+    }
+    objectStore.openCursor(keyRange).onsuccess = (e) => {
+      const cursor = e.target.result
+      if (cursor) {
+        results.push(cursor.value)
+        cursor.continue()
+      } else {
+        resolve(results)
+      }
     }
   })
 }
