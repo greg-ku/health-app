@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { sub, startOfDay } from 'date-fns'
+import { sub, startOfDay, parseISO } from 'date-fns'
 
 import { readDbByKey, saveToDb, readDbByKeyRange } from './db'
 import { IFitnessData, PeriodTypes } from '/src/types'
@@ -37,6 +37,17 @@ const getStartDate = (period: PeriodTypes, due: Date) => {
   }
 }
 
+const getExpectedDataLengh = (period: PeriodTypes) => {
+  switch (period) {
+    case '7days': return 7
+    case '30days': return 30
+    case 'aSeason': return 90
+    case 'aYear': return 365
+    case 'all': return 30
+    default: throw new Error('unexpected period')
+  }
+}
+
 export const useFitnessListByPeriod = (period: PeriodTypes) => {
   const [fitnessList, setFitnessList] = useState([])
   useEffect(() => {
@@ -48,7 +59,18 @@ export const useFitnessListByPeriod = (period: PeriodTypes) => {
         'fitness', { start: start?.toISOString(), due: due.toISOString() }
       )
       if (flag) {
-        setFitnessList(dataList)
+        const expectedLength = getExpectedDataLengh(period)
+        const resultList = expectedLength > dataList.length
+          ? Array.from({ length: expectedLength - dataList.length })
+            .map((n, i) => {
+              const lastDate = dataList[dataList.length - 1]?.date
+                ? parseISO(dataList[dataList.length - 1]?.date)
+                : startOfDay(new Date())
+              return { date: sub(lastDate, { days: expectedLength - i }).toISOString() }
+            })
+            .concat(dataList)
+          : dataList
+        setFitnessList(resultList)
       }
     }
     readFitnessListByRange()
