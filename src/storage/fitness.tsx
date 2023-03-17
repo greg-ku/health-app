@@ -48,6 +48,17 @@ const getExpectedDataLengh = (period: PeriodTypes) => {
   }
 }
 
+const appendEmptyDate = (dataList: IFitnessData[], expectedLength: number, due: Date) => {
+  const fitnessMap = new Map()
+  dataList.forEach((fitness) => fitnessMap.set(fitness.date, fitness))
+
+  return Array.from({ length: expectedLength })
+    .map((n, i) => {
+      const date = sub(due, { days: expectedLength - i - 1 }).toISOString()
+      return fitnessMap.has(date) ? fitnessMap.get(date) : { date }
+    })
+}
+
 export const useFitnessListByPeriod = (period: PeriodTypes) => {
   const [fitnessList, setFitnessList] = useState([])
   useEffect(() => {
@@ -61,14 +72,7 @@ export const useFitnessListByPeriod = (period: PeriodTypes) => {
       if (flag) {
         const expectedLength = getExpectedDataLengh(period)
         const resultList = expectedLength > dataList.length
-          ? Array.from({ length: expectedLength - dataList.length })
-            .map((n, i) => {
-              const lastDate = dataList[dataList.length - 1]?.date
-                ? parseISO(dataList[dataList.length - 1]?.date)
-                : startOfDay(new Date())
-              return { date: sub(lastDate, { days: expectedLength - i }).toISOString() }
-            })
-            .concat(dataList)
+          ? appendEmptyDate(dataList, expectedLength, due)
           : dataList
         setFitnessList(resultList)
       }
