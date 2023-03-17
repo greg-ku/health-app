@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
-import { sub, startOfDay, parseISO } from 'date-fns'
+import { useState, useEffect, useRef } from 'react'
+import { sub, startOfDay, parseISO, isBefore, isAfter } from 'date-fns'
 
-import { readDbByKey, saveToDb, readDbByKeyRange } from './db'
+import { readDbByKey, saveToDb, readDbByKeyRange, DbObserver } from './db'
 import { IFitnessData, PeriodTypes } from '/src/types'
 
 export const useFitnessByDate = (date: Date) => {
@@ -78,5 +78,28 @@ export const useFitnessListByPeriod = (period: PeriodTypes) => {
       flag = false
     }
   }, [period])
+
+  const observerIdRef = useRef<string, null>(null)
+  useEffect(() => {
+    const callback = (data) => {
+      if (fitnessList.length < 2) {
+        return
+      }
+      const target = parseISO(data.date)
+      const first = parseISO(fitnessList[0].date)
+      const last = parseISO(fitnessList[fitnessList.length - 1].date)
+      if (!isBefore(target, first) && !isAfter(target, last)) {
+        const updatedList = fitnessList
+          .map((fitness) => fitness.date === data.date ? data : fitness)
+        setFitnessList(updatedList)
+      }
+    }
+    observerIdRef.current = DbObserver.subscribe('fitness', callback)
+
+    return () => {
+      DbObserver.unsubscribe(observerIdRef.current)
+    }
+  }, [fitnessList])
+
   return fitnessList
 }

@@ -72,14 +72,42 @@ export const saveToDb = async (objectStoreName: string, data: any): Promise<any>
   const db = await getDB()
   const transaction = db.transaction([objectStoreName], 'readwrite')
   const objectStore = transaction.objectStore(objectStoreName)
-  const request = data?.createdAt
-    ? objectStore.put(data)
-    : objectStore.add({ ...data, createdAt: new Date().toISOString() })
+  const savedData = { ...data, createdAt: data?.createdAt || new Date().toISOString() }
+  const request = data?.createdAt ? objectStore.put(savedData) : objectStore.add(savedData)
   return new Promise((resolve, reject) => {
     request.onerror = (e) => reject('write db error')
     request.onsuccess = (e) => {
       // console.log('write success', e.target.result)
+      DbObserver.emit(objectStoreName, savedData)
       resolve(e.target.result || null)
     }
   })
+}
+
+interface IObserverInstance {
+  objectStoreName: string
+  id: string
+  callback: (data: any) => void
+}
+
+export class DbObserver {
+  static observers: IObserverInstance[] = []
+
+  static subscribe(objectStoreName: string, callback: (data: any) => void): string {
+    const id = crypto.randomUUID()
+    DbObserver.observers.push({ id, objectStoreName, callback })
+    return id
+  }
+
+  static unsubscribe(id: string) {
+    DbObserver.observers = DbObserver.observers.filter((observer) => observer.id !== id)
+  }
+
+  static emit(objectStoreName: string, data: any) {
+    DbObserver.observers.forEach((observer) => {
+      if (observer.objectStoreName === objectStoreName) {
+        observer.callback(data)
+      }
+    })
+  }
 }

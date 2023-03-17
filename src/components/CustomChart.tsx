@@ -1,4 +1,4 @@
-import { ResponsiveContainer, LineChart, Line, XAxis, YAxis } from 'recharts'
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts'
 
 interface IChartProps {
   data: IFitnessData[]
@@ -17,6 +17,7 @@ const CustomChart = ({ data, dataKey, color, height, title, tickFormatter }: ICh
         <LineChart data={data}>
           <XAxis dataKey="date" tickFormatter={tickFormatter} />
           <YAxis />
+          <Tooltip labelFormatter={tickFormatter} />
           <Line type="monotone" dataKey={dataKey} stroke={color || '#8884d8'} />
         </LineChart>
       </ResponsiveContainer>
