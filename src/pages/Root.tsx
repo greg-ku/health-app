@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { PencilSquareIcon } from '@heroicons/react/24/solid'
 import Modal from 'react-modal'
+import { ToastContainer } from 'react-toastify'
 
 import FitnessEditor from '/src/components/FitnessEditor'
 import WeightChart from '/src/components/WeightChart'
@@ -52,6 +53,8 @@ const Root = () => {
       >
         <FitnessEditor onSavedFinished={() => setFitnessEditModal({ show: false })}/>
       </Modal>
+
+      <ToastContainer />
     </>
   )
 }

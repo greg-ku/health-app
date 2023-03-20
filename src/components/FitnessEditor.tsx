@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { startOfDay } from 'date-fns'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import { useFitnessByDate, saveFitnessByDate } from '/src/storage/fitness'
 
@@ -33,6 +35,7 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
     if (onSavedFinished) {
       onSavedFinished()
     }
+    toast('儲存成功！')
   }
 
   return (
