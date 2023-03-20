@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
+
+.ReactModal__Overlay {
+  @apply z-30;
+}
+
 @tailwind utilities;

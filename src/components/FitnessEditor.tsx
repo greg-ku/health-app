@@ -5,7 +5,11 @@ import "react-datepicker/dist/react-datepicker.css"
 
 import { useFitnessByDate, saveFitnessByDate } from '/src/storage/fitness'
 
-const FitnessEditor = () => {
+interface IFitnessEditorProps {
+  onSavedFinished?: () => void
+}
+
+const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
   const [weight, setWeight] = useState<number>(0)
   const [bodyFat, setBodyFat] = useState<number>(0)
   const [muscle, setMuscle] = useState<number>(0)
@@ -26,6 +30,9 @@ const FitnessEditor = () => {
       muscle: parseFloat(muscle) ?? fitness?.muscle,
       date: setupDate?.toISOString() || fitness?.date,
     })
+    if (onSavedFinished) {
+      onSavedFinished()
+    }
   }
 
   return (
