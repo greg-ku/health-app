@@ -1,15 +1,28 @@
-name: Build static site
+name: Deploy github page
+
 on:
   push:
     branches:
-      - deploy
+      - master
 
 jobs:
-  build:
+  sync-branch:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       
+      - name: Merge master -> deploy
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: master
+          target_branch: deploy
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/checkout@v3
+        with:
+          ref: 'deploy'
+
       - name: Set Node.js 16.x
         uses: actions/setup-node@v3
         with:
