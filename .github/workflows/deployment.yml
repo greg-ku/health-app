@@ -40,7 +40,7 @@ jobs:
       
       - name: Rename dist folder
         run: |
-          mv dist github-page
+          mv dist docs
 
       - name: Commit & Push changes
         uses: actions-js/push@master
