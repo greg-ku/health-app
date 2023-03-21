@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  sync-branch:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -40,7 +40,7 @@ jobs:
       
       - name: Rename dist folder
         run: |
-          mv dist docs
+          cp -a dist/* docs
 
       - name: Commit & Push changes
         uses: actions-js/push@master
