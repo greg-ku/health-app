@@ -1,0 +1,15 @@
+{
+  "name": "HealthApp",
+  "short_name": "HealthApp",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "A simple fitness record app.",
+  "icons": [
+    {
+      "src": "vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
