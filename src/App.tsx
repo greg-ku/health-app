@@ -14,7 +14,7 @@ const router = createBrowserRouter([
 function App() {
   const [showSplash, setShowSplash] = useState(true)
   useEffect(() => {
-    let timeout = null
+    let timeout: ReturnType<typeof setTimeout>
     if (showSplash) {
       timeout = setTimeout(() => setShowSplash(false), 500)
     }
