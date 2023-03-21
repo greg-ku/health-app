@@ -7,7 +7,7 @@
   "description": "A simple fitness record app.",
   "icons": [
     {
-      "src": "vite.svg",
+      "src": "/health-app/vite.svg",
       "sizes": "any",
       "type": "image/svg+xml"
     }
