@@ -51,7 +51,7 @@ const Root = () => {
             <VisceralFatChart data={data} height={400} />
           </div>
           <div className="px-2 hidden md:block">
-            <div className="sticky top-16">
+            <div className="sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto">
               <div className="text-xl font-bold">編輯</div>
               <FitnessEditor />
             </div>
