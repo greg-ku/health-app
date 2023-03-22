@@ -6,7 +6,13 @@ import { ToastContainer } from 'react-toastify'
 import FitnessEditor from '/src/components/FitnessEditor'
 import WeightChart from '/src/components/Charts/WeightChart'
 import BodyFatChart from '/src/components/Charts/BodyFatChart'
+import BoneMassChart from '/src/components/Charts/BoneMassChart'
+import TotalBodyWaterChart from '/src/components/Charts/TotalBodyWaterChart'
 import MuscleChart from '/src/components/Charts/MuscleChart'
+import BodyMassScoreChart from '/src/components/Charts/BodyMassScoreChart'
+import BasalMetabolicRateChart from '/src/components/Charts/BasalMetabolicRateChart'
+import PhysicalAgeChart from '/src/components/Charts/PhysicalAgeChart'
+import VisceralFatChart from '/src/components/Charts/VisceralFatChart'
 import { useFitnessListByPeriod } from '/src/storage/fitness'
 
 Modal.setAppElement('#my-app-modal')
@@ -36,7 +42,13 @@ const Root = () => {
             </div>
             <WeightChart data={data} height={400} />
             <BodyFatChart data={data} height={400} />
+            <BoneMassChart data={data} height={400} />
+            <TotalBodyWaterChart data={data} height={400} />
             <MuscleChart data={data} height={400} />
+            <BodyMassScoreChart data={data} height={400} />
+            <BasalMetabolicRateChart data={data} height={400} />
+            <PhysicalAgeChart data={data} height={400} />
+            <VisceralFatChart data={data} height={400} />
           </div>
           <div className="px-2 hidden md:block">
             <div className="sticky top-16">

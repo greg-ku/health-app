@@ -2,15 +2,15 @@ import { isoDateFormatter } from '/src/utils/helpers'
 import { IFitnessData, IFitnessChartProps } from '/src/types'
 import CustomChart from './CustomChart'
 
-const BodyFatChart = (props: IFitnessChartProps) => {
+const WeightChart = (props: IFitnessChartProps) => {
   return (
     <CustomChart
       {...props}
-      dataKey="bodyFat"
-      title="體脂率%"
+      dataKey="bodyMassScore"
+      title="體質分數"
       tickFormatter={isoDateFormatter}
     />
   )
 }
 
-export default BodyFatChart
+export default WeightChart

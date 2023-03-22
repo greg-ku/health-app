@@ -6,4 +6,9 @@ export interface IFitnessData {
   createdAt?: Date
 }
 
+export interface IFitnessChartProps {
+  data: IFitnessData[]
+  height?: number
+}
+
 export type PeriodTypes = '7days' | '30days' | 'aSeason' | 'aYear' | 'all'

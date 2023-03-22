@@ -1,13 +1,8 @@
 import { isoDateFormatter } from '/src/utils/helpers'
-import { IFitnessData } from '/src/types'
+import { IFitnessData, IFitnessChartProps } from '/src/types'
 import CustomChart from './CustomChart'
 
-interface IWeightChartProps {
-  data: IFitnessData[]
-  height?: number
-}
-
-const WeightChart = (props: IWeightChartProps) => {
+const WeightChart = (props: IFitnessChartProps) => {
   return (
     <CustomChart
       {...props}

@@ -1,5 +1,7 @@
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts'
 
+import { IFitnessData } from '/src/types'
+
 interface IChartProps {
   data: IFitnessData[]
   dataKey: string
