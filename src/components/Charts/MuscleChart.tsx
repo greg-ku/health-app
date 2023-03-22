@@ -1,6 +1,6 @@
 import { isoDateFormatter } from '/src/utils/helpers'
 import { IFitnessData } from '/src/types'
-import CustomChart from '/src/components/CustomChart'
+import CustomChart from './CustomChart'
 
 interface IMuscleChartProps {
   data: IFitnessData[]

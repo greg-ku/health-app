@@ -4,9 +4,9 @@ import Modal from 'react-modal'
 import { ToastContainer } from 'react-toastify'
 
 import FitnessEditor from '/src/components/FitnessEditor'
-import WeightChart from '/src/components/WeightChart'
-import BodyFatChart from '/src/components/BodyFatChart'
-import MuscleChart from '/src/components/MuscleChart'
+import WeightChart from '/src/components/Charts/WeightChart'
+import BodyFatChart from '/src/components/Charts/BodyFatChart'
+import MuscleChart from '/src/components/Charts/MuscleChart'
 import { useFitnessListByPeriod } from '/src/storage/fitness'
 
 Modal.setAppElement('#my-app-modal')

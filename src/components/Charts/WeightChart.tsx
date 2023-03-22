@@ -1,21 +1,21 @@
 import { isoDateFormatter } from '/src/utils/helpers'
 import { IFitnessData } from '/src/types'
-import CustomChart from '/src/components/CustomChart'
+import CustomChart from './CustomChart'
 
-interface IBodyFatChartProps {
+interface IWeightChartProps {
   data: IFitnessData[]
   height?: number
 }
 
-const BodyFatChart = (props: IBodyFatChartProps) => {
+const WeightChart = (props: IWeightChartProps) => {
   return (
     <CustomChart
       {...props}
-      dataKey="bodyFat"
-      title="體脂肪"
+      dataKey="weight"
+      title="體重"
       tickFormatter={isoDateFormatter}
     />
   )
 }
 
-export default BodyFatChart
+export default WeightChart
