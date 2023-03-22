@@ -62,7 +62,7 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
       <div>
         <input
           type="number"
-          inputMode="numeric"
+          inputMode="decimal"
           className="w-full px-3 py-2 border border-gray-400 rounded"
           value={weight}
           onChange={(e) => setWeight(e.target.value)}
@@ -74,7 +74,7 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
       <div>
         <input
           type="number"
-          inputMode="numeric"
+          inputMode="decimal"
           className="w-full px-3 py-2 border border-gray-400 rounded"
           value={bodyFat}
           onChange={(e) => setBodyFat(e.target.value)}
@@ -86,7 +86,7 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
       <div>
         <input
           type="number"
-          inputMode="numeric"
+          inputMode="decimal"
           className="w-full px-3 py-2 border border-gray-400 rounded"
           value={boneMass}
           onChange={(e) => setBoneMass(e.target.value)}
@@ -98,7 +98,7 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
       <div>
         <input
           type="number"
-          inputMode="numeric"
+          inputMode="decimal"
           className="w-full px-3 py-2 border border-gray-400 rounded"
           value={totalBodyWater}
           onChange={(e) => setTotalBodyWater(e.target.value)}
@@ -110,7 +110,7 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
       <div>
         <input
           type="number"
-          inputMode="numeric"
+          inputMode="decimal"
           className="w-full px-3 py-2 border border-gray-400 rounded"
           value={muscle}
           onChange={(e) => setMuscle(e.target.value)}
@@ -122,7 +122,7 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
       <div>
         <input
           type="number"
-          inputMode="numeric"
+          inputMode="decimal"
           className="w-full px-3 py-2 border border-gray-400 rounded"
           value={bodyMassScore}
           onChange={(e) => setBodyMassScore(e.target.value)}
@@ -134,7 +134,7 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
       <div>
         <input
           type="number"
-          inputMode="numeric"
+          inputMode="decimal"
           className="w-full px-3 py-2 border border-gray-400 rounded"
           value={basalMetabolicRate}
           onChange={(e) => setBasalMetabolicRate(e.target.value)}
@@ -146,7 +146,7 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
       <div>
         <input
           type="number"
-          inputMode="numeric"
+          inputMode="decimal"
           className="w-full px-3 py-2 border border-gray-400 rounded"
           value={physicalAge}
           onChange={(e) => setPhysicalAge(e.target.value)}
@@ -158,7 +158,7 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
       <div>
         <input
           type="number"
-          inputMode="numeric"
+          inputMode="decimal"
           className="w-full px-3 py-2 border border-gray-400 rounded"
           value={visceralFat}
           onChange={(e) => setVisceralFat(e.target.value)}
