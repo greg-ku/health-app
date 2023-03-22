@@ -2,7 +2,12 @@
 @tailwind components;
 
 .ReactModal__Overlay {
-  @apply z-30;
+  @apply z-30 flex justify-center overflow-y-auto;
+}
+
+.ReactModal__Content {
+  @apply mt-20 mb-20 w-4/5;
+  inset: unset !important;
 }
 
 @tailwind utilities;
