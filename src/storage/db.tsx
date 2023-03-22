@@ -1,8 +1,14 @@
-let db: IDBDatabase = null
+let db = {
+  instance<IDBDatabase>: null,
+  handleVersionChange: () => {
+    db.instance.close()
+    console.log('A new version of this page is ready. Please reload or close this tab!')
+  }
+}
 
 const getDB = (): Promise<IDBDatabase> => {
-  if (db) {
-    return Promise.resolve(db)
+  if (db.instance) {
+    return Promise.resolve(db.instance)
   }
 
   return new Promise((resolve, reject) => {
@@ -10,13 +16,18 @@ const getDB = (): Promise<IDBDatabase> => {
     request.onerror = (e) => reject('db open error')
     request.onsuccess = (e) => {
       // console.log('db success')
-      db = e.target.result
-      resolve(db)
+      db.instance = e.target.result
+      db.instance.onversionchange = db.handleVersionChange
+      resolve(db.instance)
     }
     request.onupgradeneeded = (e) => {
+      // All other databases have been closed. Set everything up.
       const db: IDBDatabase = e.target.result
 
       const objectStore: IDBObjectStore = db.createObjectStore('fitness', { keyPath: 'date' })
+    }
+    request.onblocked = () => {
+      console.error('Db blocked. Please close all other tabs with this site open!')
     }
   })
 }
