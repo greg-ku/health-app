@@ -1,13 +1,13 @@
 import { isoDateFormatter } from '/src/utils/helpers'
-import { IFitnessData } from '/src/types'
-import CustomChart from '/src/components/CustomChart'
+import { IFitnessData, IFitnessChartProps } from '/src/types'
+import CustomChart from './CustomChart'
 
 interface IMuscleChartProps {
   data: IFitnessData[]
   height?: number
 }
 
-const MuscleChart = (props: IMuscleChartProps) => {
+const MuscleChart = (props: IFitnessChartProps) => {
   return (
     <CustomChart
       {...props}
