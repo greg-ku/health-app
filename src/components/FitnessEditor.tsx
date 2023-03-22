@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
 import { startOfDay } from 'date-fns'
-import DatePicker from "react-datepicker"
+import DatePicker, { registerLocale } from "react-datepicker"
+import zhTW from 'date-fns/locale/zh-TW'
 import "react-datepicker/dist/react-datepicker.css"
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import { useFitnessByDate, saveFitnessByDate } from '/src/storage/fitness'
+
+registerLocale('zh-TW', zhTW)
 
 interface IFitnessEditorProps {
   onSavedFinished?: () => void
@@ -172,6 +175,7 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
           selected={setupDate}
           onChange={(date) => setSetupDate(date)}
           className="w-full px-3 py-2 border border-gray-400 rounded"
+          locale="zh-TW"
         />
       </div>
       <button
