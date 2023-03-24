@@ -26,13 +26,13 @@ const SideBarMenu = ({ isOpen, onClose }: ISideBarMenuProps) => {
         </div>
 
         <div className="w-full h-full flex flex-col items-start border-r border-gray-200">
-          <Link to="/health-app">
+          <Link to={`${import.meta.env.BASE_URL}`}>
             <button className="w-full px-6 py-4 text-left flex" onClick={onClose}>
               <DocumentChartBarIcon className="h-6 w-6 mr-2" />
               體重體脂紀錄
             </button>
           </Link>
-          <Link to="/health-app/water-intake">
+          <Link to={`${import.meta.env.BASE_URL}/water-intake`}>
             <button className="w-full px-6 py-4 text-left flex" onClick={onClose}>
               <DocumentChartBarIcon className="h-6 w-6 mr-2" />
               飲水紀錄
