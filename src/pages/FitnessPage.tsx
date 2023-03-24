@@ -17,7 +17,7 @@ import { useFitnessListByPeriod } from '/src/storage/fitness'
 Modal.setAppElement('#my-app-modal')
 
 const FitnessPage = () => {
-  const [period, setPeriod] = useState<string>('30days')
+  const [period, setPeriod] = useState<PeriodTypes>('30days')
   const data = useFitnessListByPeriod(period)
 
   const [fitnessEditModal, setFitnessEditModal] = useState({ show: false })

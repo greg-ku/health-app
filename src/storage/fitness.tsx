@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { sub, startOfDay, parseISO, isBefore, isAfter } from 'date-fns'
 
+import { fillDataInPeriod } from '/src/utils/helpers'
 import { readDbByKey, saveToDb, readDbByKeyRange, DbObserver } from './db'
 import { IFitnessData, PeriodTypes } from '/src/types'
 
@@ -37,28 +38,6 @@ const getStartDate = (period: PeriodTypes, due: Date) => {
   }
 }
 
-const getExpectedDataLengh = (period: PeriodTypes) => {
-  switch (period) {
-    case '7days': return 7
-    case '30days': return 30
-    case 'aSeason': return 90
-    case 'aYear': return 365
-    case 'all': return 30
-    default: throw new Error('unexpected period')
-  }
-}
-
-const appendEmptyDate = (dataList: IFitnessData[], expectedLength: number, due: Date) => {
-  const fitnessMap = new Map()
-  dataList.forEach((fitness) => fitnessMap.set(fitness.date, fitness))
-
-  return Array.from({ length: expectedLength })
-    .map((n, i) => {
-      const date = sub(due, { days: expectedLength - i - 1 }).toISOString()
-      return fitnessMap.has(date) ? fitnessMap.get(date) : { date }
-    })
-}
-
 export const useFitnessListByPeriod = (period: PeriodTypes) => {
   const [fitnessList, setFitnessList] = useState([])
   useEffect(() => {
@@ -70,10 +49,7 @@ export const useFitnessListByPeriod = (period: PeriodTypes) => {
         'fitness', { start: start?.toISOString(), due: due.toISOString() }
       )
       if (flag) {
-        const expectedLength = getExpectedDataLengh(period)
-        const resultList = expectedLength > dataList.length
-          ? appendEmptyDate(dataList, expectedLength, due)
-          : dataList
+        const resultList = fillDataInPeriod(period, due, dataList)
         setFitnessList(resultList)
       }
     }

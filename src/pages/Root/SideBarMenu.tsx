@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { DocumentChartBarIcon } from '@heroicons/react/24/solid'
 
+import AppLogo from './AppLogo'
 import MenuButton from './MenuButton'
 
 interface ISideBarMenuProps {
@@ -44,3 +45,4 @@ const SideBarMenu = ({ isOpen, onClose }: ISideBarMenuProps) => {
   )
 }
 
+export default SideBarMenu
