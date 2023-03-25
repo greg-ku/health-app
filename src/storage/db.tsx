@@ -17,7 +17,7 @@ const getDB = (): Promise<IDBDatabase> => {
   }
 
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open('healthAppDb', 1)
+    const request = indexedDB.open('healthAppDb', 2)
     request.onerror = (e) => reject('db open error')
     request.onsuccess = (e) => {
       // console.log('db success')
@@ -29,7 +29,12 @@ const getDB = (): Promise<IDBDatabase> => {
       // All other databases have been closed. Set everything up.
       const db: IDBDatabase = e.target.result
 
-      const objectStore: IDBObjectStore = db.createObjectStore('fitness', { keyPath: 'date' })
+      if (!db.objectStoreNames.contains('fitness')) {
+        db.createObjectStore('fitness', { keyPath: 'date' })
+      }
+      if (!db.objectStoreNames.contains('waterIntake')) {
+        db.createObjectStore('waterIntake', { keyPath: 'date' })
+      }
     }
     request.onblocked = () => {
       console.error('Db blocked. Please close all other tabs with this site open!')
@@ -91,7 +96,7 @@ export const saveToDb = async (objectStoreName: string, data: any): Promise<any>
   const savedData = { ...data, createdAt: data?.createdAt || new Date().toISOString() }
   const request = data?.createdAt ? objectStore.put(savedData) : objectStore.add(savedData)
   return new Promise((resolve, reject) => {
-    request.onerror = (e) => reject('write db error')
+    request.onerror = (e) => reject('saveToDb: write db error')
     request.onsuccess = (e) => {
       // console.log('write success', e.target.result)
       DbObserver.emit(objectStoreName, savedData)
@@ -128,7 +133,7 @@ export class DbObserver {
   }
 }
 
-export const useDateDataByDate = <DataType>(objectStoreName: string, date: Date) => {
+export const useDateDataByDate = <DataType,>(objectStoreName: string, date: Date) => {
   const [data, setData] = useState<DateType, null>(null)
   useEffect(() => {
     let flag = true

@@ -1,11 +1,18 @@
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 
+import { addWaterIntakeToDate } from '/src/storage/waterIntake'
 import TextInput from '/src/components/TextInput'
 import Button from '/src/components/Button'
 
 
 const WaterIntakeEditor = () => {
   const [water, setWater] = useState<number>(0)
+
+  const onAddWaterIntakeClick = async () => {
+    await addWaterIntakeToDate({ value: parseInt(water), type: 'water' }, new Date())
+    toast('儲存成功！')
+  }
 
   return (
     <>
@@ -19,7 +26,7 @@ const WaterIntakeEditor = () => {
           onFocus={(e) => e.target.select()}
         />
       </div>
-      <Button>
+      <Button onClick={onAddWaterIntakeClick}>
         加水
       </Button>
     </>
