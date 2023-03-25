@@ -5,12 +5,18 @@ import { addWaterIntakeToDate } from '/src/storage/waterIntake'
 import TextInput from '/src/components/TextInput'
 import Button from '/src/components/Button'
 
+interface IWaterIntakeEditorProps {
+  onSavedFinished?: () => void
+}
 
-const WaterIntakeEditor = () => {
+const WaterIntakeEditor = ({ onSavedFinished }: IWaterIntakeEditorProps) => {
   const [water, setWater] = useState<number>(0)
 
   const onAddWaterIntakeClick = async () => {
     await addWaterIntakeToDate({ value: parseInt(water), type: 'water' }, new Date())
+    if (onSavedFinished) {
+      onSavedFinished()
+    }
     toast('儲存成功！')
   }
 

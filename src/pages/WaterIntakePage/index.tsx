@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { PencilSquareIcon } from '@heroicons/react/24/solid'
+import Modal from 'react-modal'
 
 import { useWaterIntakeByPeriod } from '/src/storage/waterIntake.tsx'
 import WaterIntakeEditor from './WaterIntakeEditor'
@@ -10,12 +11,15 @@ const WaterIntakePage = () => {
   const [period, setPeriod] = useState<PeriodTypes>('30days')
   const data = useWaterIntakeByPeriod(period, now)
 
+  const [waterIntakeEditModal, setWaterIntakEditModal] = useState({ show: false })
+  const onEditWaterIntakeClick = () => setWaterIntakEditModal({ show: true })
+
   return (
     <>
       <div className="grid grid-cols-4 pt-2">
         <div className="col-span-4 md:col-span-3 pr-8 md:pr-4">
           <div className="sticky top-16 bg-white z-10 flex justify-end w-full">
-            <button className="p-4 md:hidden">
+            <button className="p-4 md:hidden" onClick={onEditWaterIntakeClick}>
               <PencilSquareIcon className="h-6 w-6" />
             </button>
           </div>
@@ -27,6 +31,13 @@ const WaterIntakePage = () => {
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={waterIntakeEditModal.show}
+        onRequestClose={() => setWaterIntakEditModal({ show: false })}
+      >
+        <WaterIntakeEditor onSavedFinished={() => setWaterIntakEditModal({ show: false })}/>
+      </Modal>
     </>
   )
 }
