@@ -12,3 +12,14 @@ export interface IFitnessChartProps {
 }
 
 export type PeriodTypes = '7days' | '30days' | 'aSeason' | 'aYear' | 'all'
+
+export interface IWaterIntakeLog {
+  total: number
+  type: string
+}
+
+export interface IWaterIntakeData {
+  total: number
+  logs: IWaterIntakeLog[]
+  date: Date
+}

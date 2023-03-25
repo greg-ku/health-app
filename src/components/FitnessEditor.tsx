@@ -7,6 +7,8 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import { useFitnessByDate, saveFitnessByDate } from '/src/storage/fitness'
+import TextInput from '/src/components/TextInput'
+import Button from '/src/components/Button'
 
 registerLocale('zh-TW', zhTW)
 
@@ -63,10 +65,9 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
     <>
       <div className="mt-3">體重</div>
       <div>
-        <input
+        <TextInput
           type="number"
           inputMode="decimal"
-          className="w-full px-3 py-2 border border-gray-400 rounded"
           value={weight}
           onChange={(e) => setWeight(e.target.value)}
           onFocus={(e) => e.target.select()}
@@ -75,10 +76,9 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
 
       <div className="mt-2">體脂率%</div>
       <div>
-        <input
+        <TextInput
           type="number"
           inputMode="decimal"
-          className="w-full px-3 py-2 border border-gray-400 rounded"
           value={bodyFat}
           onChange={(e) => setBodyFat(e.target.value)}
           onFocus={(e) => e.target.select()}
@@ -87,10 +87,9 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
 
       <div className="mt-2">推定骨量</div>
       <div>
-        <input
+        <TextInput
           type="number"
           inputMode="decimal"
-          className="w-full px-3 py-2 border border-gray-400 rounded"
           value={boneMass}
           onChange={(e) => setBoneMass(e.target.value)}
           onFocus={(e) => e.target.select()}
@@ -99,10 +98,9 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
 
       <div className="mt-2">總含水率%</div>
       <div>
-        <input
+        <TextInput
           type="number"
           inputMode="decimal"
-          className="w-full px-3 py-2 border border-gray-400 rounded"
           value={totalBodyWater}
           onChange={(e) => setTotalBodyWater(e.target.value)}
           onFocus={(e) => e.target.select()}
@@ -111,10 +109,9 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
 
       <div className="mt-2">肌肉量</div>
       <div>
-        <input
+        <TextInput
           type="number"
           inputMode="decimal"
-          className="w-full px-3 py-2 border border-gray-400 rounded"
           value={muscle}
           onChange={(e) => setMuscle(e.target.value)}
           onFocus={(e) => e.target.select()}
@@ -123,10 +120,9 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
 
       <div className="mt-2">體質分數</div>
       <div>
-        <input
+        <TextInput
           type="number"
           inputMode="decimal"
-          className="w-full px-3 py-2 border border-gray-400 rounded"
           value={bodyMassScore}
           onChange={(e) => setBodyMassScore(e.target.value)}
           onFocus={(e) => e.target.select()}
@@ -135,10 +131,9 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
 
       <div className="mt-2">基礎代謝率</div>
       <div>
-        <input
+        <TextInput
           type="number"
           inputMode="decimal"
-          className="w-full px-3 py-2 border border-gray-400 rounded"
           value={basalMetabolicRate}
           onChange={(e) => setBasalMetabolicRate(e.target.value)}
           onFocus={(e) => e.target.select()}
@@ -147,10 +142,9 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
 
       <div className="mt-2">身體年齡</div>
       <div>
-        <input
+        <TextInput
           type="number"
           inputMode="decimal"
-          className="w-full px-3 py-2 border border-gray-400 rounded"
           value={physicalAge}
           onChange={(e) => setPhysicalAge(e.target.value)}
           onFocus={(e) => e.target.select()}
@@ -159,10 +153,9 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
 
       <div className="mt-2">內臟脂肪</div>
       <div>
-        <input
+        <TextInput
           type="number"
           inputMode="decimal"
-          className="w-full px-3 py-2 border border-gray-400 rounded"
           value={visceralFat}
           onChange={(e) => setVisceralFat(e.target.value)}
           onFocus={(e) => e.target.select()}
@@ -178,12 +171,9 @@ const FitnessEditor = ({ onSavedFinished }: IFitnessEditorProps) => {
           locale="zh-TW"
         />
       </div>
-      <button
-        className="w-full px-3 py-2 rounded bg-sky-500 text-white mt-4"
-        onClick={onSaveFitness}
-      >
+      <Button onClick={onSaveFitness}>
         儲存
-      </button>
+      </Button>
     </>
   )
 }
