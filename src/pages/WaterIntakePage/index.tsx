@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { PencilSquareIcon } from '@heroicons/react/24/solid'
-import Modal from 'react-modal'
 
 import { useWaterIntakeByPeriod } from '/src/storage/waterIntake.tsx'
+import Modal from '/src/components/Modal'
 import WaterIntakeEditor from './WaterIntakeEditor'
 import WaterIntakeChart from './WaterIntakeChart'
 
