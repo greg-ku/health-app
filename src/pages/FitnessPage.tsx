@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { PencilSquareIcon } from '@heroicons/react/24/solid'
-import Modal from 'react-modal'
 
+import Modal from '/src/components/Modal'
 import FitnessEditor from '/src/components/FitnessEditor'
 import WeightChart from '/src/components/Charts/WeightChart'
 import BodyFatChart from '/src/components/Charts/BodyFatChart'
@@ -13,8 +13,6 @@ import BasalMetabolicRateChart from '/src/components/Charts/BasalMetabolicRateCh
 import PhysicalAgeChart from '/src/components/Charts/PhysicalAgeChart'
 import VisceralFatChart from '/src/components/Charts/VisceralFatChart'
 import { useFitnessListByPeriod } from '/src/storage/fitness'
-
-Modal.setAppElement('#my-app-modal')
 
 const FitnessPage = () => {
   const [period, setPeriod] = useState<PeriodTypes>('30days')
