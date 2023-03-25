@@ -18,7 +18,8 @@ Modal.setAppElement('#my-app-modal')
 
 const FitnessPage = () => {
   const [period, setPeriod] = useState<PeriodTypes>('30days')
-  const data = useFitnessListByPeriod(period)
+  const [now] = useState(new Date())
+  const data = useFitnessListByPeriod(period, now)
 
   const [fitnessEditModal, setFitnessEditModal] = useState({ show: false })
   const onEditFitnessClick = () => setFitnessEditModal({ show: true })
