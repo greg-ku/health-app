@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense, lazy } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import RootPage from './pages/Root'
-import FitnessPage from './pages/FitnessPage'
-import WaterIntakePage from './pages/WaterIntakePage'
 import './index.css'
+
+const FitnessPage = lazy(() => import('./pages/FitnessPage'))
+const WaterIntakePage = lazy(() => import('./pages/WaterIntakePage'))
 
 const router = createBrowserRouter([
   {
@@ -12,11 +13,20 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <FitnessPage/>
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <FitnessPage />
+          </Suspense>
+        )
       },
       {
         path: 'water-intake',
-        element: <WaterIntakePage/>
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <WaterIntakePage />
+          </Suspense>
+
+        )
       }
     ]
   },
